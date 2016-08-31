@@ -7,31 +7,26 @@
 -  项目总共分为三个模块，分别为Android端、PC端以及Web端
 -  以下将分别从这三个模块进行较为详细的介绍
 
-### “灵动快传”Android端介绍
+### “灵动快传”PC端介绍
 
 > 本项目全称为：互联网多平台文件快传系统——灵动快传
 > 
 > 开发人员：周博文 郑志琦 董致礼
 > 
-> 集成开发工具：Android Studio 2.1.2 
+> 集成开发工具：eclipse 
 > 
 > 开发语言：Java
 
 #####Android端APP的UI展示
 
-![image](https://github.com/zhoubowen-sky/LingDong2.0/blob/master/github-images-folder/loading.jpg)
-![image](https://github.com/zhoubowen-sky/LingDong2.0/blob/master/github-images-folder/cebianlan.jpg)
-![image](https://github.com/zhoubowen-sky/LingDong2.0/blob/master/github-images-folder/chuansong.jpg)
-![image](https://github.com/zhoubowen-sky/LingDong2.0/blob/master/github-images-folder/wenjianguanli.jpg)
-![image](https://github.com/zhoubowen-sky/LingDong2.0/blob/master/github-images-folder/yaokongdiannao.jpg)
-![image](https://github.com/zhoubowen-sky/LingDong2.0/blob/master/github-images-folder/main.jpg)
-![image](https://github.com/zhoubowen-sky/LingDong2.0/blob/master/github-images-folder/feedback.jpg)
-![image](https://github.com/zhoubowen-sky/LingDong2.0/blob/master/github-images-folder/trans.jpg)
-![image](https://github.com/zhoubowen-sky/LingDong2.0/blob/master/github-images-folder/offlinetrans.jpg)
+![image](https://github.com/zhoubowen-sky/File-Transmit-pc/blob/master/github-images-folder/main.jpg)
+![image](https://github.com/zhoubowen-sky/File-Transmit-pc/blob/master/github-images-folder/lixianwenjian.jpg)
+![image](https://github.com/zhoubowen-sky/File-Transmit-pc/blob/master/github-images-folder/zidingyi.jpg)
+![image](https://github.com/zhoubowen-sky/File-Transmit-pc/blob/master/github-images-folder/xiazaishezhi.jpg)
 
 #####Android端APP程序相关说明
 
-> 程序目录中 **github-images-folder** 文件夹与APP程序无关，里面的图片为Github项目README页面的说明
+> 程序目录中 **github-images-folder** 文件夹与PC端程序无关，里面的图片为Github项目README页面的说明
 > 次APP
 
 
