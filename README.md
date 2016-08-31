@@ -13,9 +13,9 @@
 > 
 > 开发人员：周博文 郑志琦 董致礼
 > 
-> 集成开发工具：eclipse 
+> 集成开发工具：zend Studio 
 > 
-> 开发语言：Java
+> 开发语言：PHP、JavaScript、HTML、CSS
 
 #####Web端程序的UI展示
 
