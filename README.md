@@ -19,7 +19,7 @@
 
 #####PC端程序的UI展示
 
-![image](https://github.com/zhoubowen-sky/LingDongWeb/blob/master/github-images-folder/main.jpg)
+![image](https://github.com/zhoubowen-sky/LingDongWeb/blob/master/github-images-folder/filesUPandDOWN.jpg)
 ![image](https://github.com/zhoubowen-sky/LingDongWeb/blob/master/github-images-folder/lixianwenjian.jpg)
 ![image](https://github.com/zhoubowen-sky/LingDongWeb/blob/master/github-images-folder/zidingyi.jpg)
 ![image](https://github.com/zhoubowen-sky/LingDongWeb/blob/master/github-images-folder/xiazaishezhi.jpg)
