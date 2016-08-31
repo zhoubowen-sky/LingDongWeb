@@ -1,0 +1,341 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>灵动快传数据可视化分析</title>
+    <link href="../css/landing-page.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="../bootstrap.min.css" rel="stylesheet"> 使用本地的CSS样式文件，后期改为CDN-->
+    
+    <!-- 下面是添加网站标题栏前面的Logo <link rel="icon" href="website_icon.ico" type="image/x-icon" />-->
+    <link rel="shortcut icon" href="../img/website_icon.ico"/>
+    
+    <!-- 引入 echarts.js <script src="echarts.min.js"></script>-->
+	<script src="//cdn.bootcss.com/echarts/3.2.2/echarts.min.js"></script>
+    <!--引入jquery.js文件，因为用到了异步加载ajax-->
+    <!--<script src="jquery.min.js"></script><script src="../jquery-3.1.0.min.js"></script>-->
+	<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+    
+	
+	
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+    <!--APP二维码显示的脚本-->
+    <script type="text/javascript">
+        function  showImg(){
+            document.getElementById("wxImg").style.display='block';
+        }
+        function hideImg(){
+            document.getElementById("wxImg").style.display='none';
+        }
+    </script>
+
+
+    <style type='text/css'>
+        body {
+            background-color: #FFF;
+        }
+        #content {
+            background-color: #FFF;
+            border-radius: 5px;
+        }
+        #content .main {
+            padding-top: 60px;
+            padding-left: 220px;
+            padding-right: 0px;
+        }
+        #content .sidebar {
+            padding-top: 130px;
+            padding-left: 0px;
+            padding-right: 0px;
+            position: fixed; /*固定左侧导航栏的位置*/
+        }
+        #content p {
+            line-height: 25px;/*行高*/
+        }
+        .container-julidingbudejuli {
+            padding-top: 50px; /*点击左侧导航栏的时候，为了让右边内容显示的更合理二设置的CSS样式*/
+        }
+        /*鼠标移动显示APP二维码的CSS样式,用到了hover伪类*/
+        .APP_ErWeiMa:hover img{
+            display:block;
+        }
+        .APP_ErWeiMa img{
+            display:none;
+            position: absolute; left: 0px; top: 21px;
+        }
+		.dibianlanyanse{
+			background:#1C1C1C;
+		}
+
+    </style>
+
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand topnav " href="../index.php">灵动快传文件分享平台</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right ">
+                    <li>
+                        <a href="../index.php#uploadfiles">上传文件</a><!--连接到网站首页的上传文件的位置，以下的按钮也是类似-->
+                    </li>
+                    <li>
+                        <a href="../index.php#downloadfiles">下载文件</a>
+                    </li>
+                    <li>
+                        <a href="avascript:void(0)">大数据分析</a>
+                    </li>
+                    <li>
+                        <a href="../index.php#aboutus">关于我们</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" onMouseOut="hideImg()"  onmouseover="showImg()">扫码下载APP</a><!--这里做成用户鼠标一移动到这儿就显示一个二维码的图片，用户扫码后就可以跳转到APP的下载界面-->
+                        <div id="wxImg" style="display:none;position:absolute;"><img src="../img/APP_ErWeiMa.jpg"></div>
+                    </li>
+					<li>
+                        <a href="http://115.28.101.196/AndroidAPK/LingDong_PC_V2.1.zip">下载PC版软件</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div id='content' class='row'><!-- -fluid   --> <!--这是流式布局的样式-->
+            <div class=' sidebar'><!--col-lg-2-->
+                <ul class="nav nav-tabs nav-stacked " align = "center">
+                    <li><a href='#gnmksypl'>功能模块使用频率</a></li>
+                    <li><a href='#cswjlxfx'>传输文件类型分析</a></li>
+                    <li><a href='#cswjdxfx'>传输文件大小分析</a></li>
+                    <li><a href='#wjscsjfb'>APP启动时间分析</a></li>
+                    <li><a href='#APPsysjfx'>APP使用时长分析</a></li>
+                    <li><a href='#AndroidVersion'>安卓手机版本分布</a></li>
+                    <li><a href='#khdfblfb'>客户端分辨率分布</a></li>
+                    <li><a href='#yhdyfbqk'><!--用户地域分布情况-->数据可视化小总结</a></li>
+                </ul>
+            </div>
+
+            <!--添加一个锚点-->
+            <a name="gnmksypl"></a>
+            <div class='main'><!--span11-->
+
+                <div>
+                    <h3>功能模块使用频率</h3>
+                    <!-- 为ECharts准备一个具备大小（宽高）合适的Dom -->
+                    <div id="Modules_Using_Times" style="height:550px;"></div>
+                    <!--添加Echarts相关的JS脚本代码-->
+                    <script type="text/javascript" src="MyJavaScript/Modules_Using_Times.js"></script>
+
+                    <div>
+                        <p>
+                            上述表格显示的是移动端APP各个功能模块的使用情况。<br>
+                            <b>表格数据分析结果</b>：<br>
+							1.APP端可大致分为13个功能模块，其中“连接电脑”、“创建连接”、“搜索加入”三个模块的使用率相对较高。<br>
+                            2.“离线文件”的功能使用频率相对较低。<br>
+                            <b>结论</b>：<br>
+							1.“连接电脑”、“创建连接”、“搜索加入”三个模块的使用率相对较高，这也符合我们APP的核心定位——“面对面文件快传”。<br>
+							2.我们新添加的“离线文件”功能使用率不是太高，原因应该是消耗用户流量过多。<br>
+							3.用户更愿意使用不消耗流量的文件分享方式————“面对面文件快传”。<br>
+							 <b>注</b>：APP端的“文件漂流瓶”功能与网页端的文件上传下载文件是同一个功能，两者是一体的。
+                        </p>
+                    </div>
+
+
+                </div>
+
+                <!--添加一个锚点-->
+                <a name="cswjlxfx"></a>
+                <div class="container-julidingbudejuli">
+                    <h3>传输文件类型分析</h3>
+					 <!-- 为ECharts准备一个具备大小（宽高）合适的Dom -->
+                    <div id="Files_Trans_Type" style="height:550px;"></div>
+                    <!--添加Echarts相关的JS脚本代码-->
+                    <script type="text/javascript" src="MyJavaScript/Files_Trans_Type.js"></script>
+
+                    
+                    <p>
+                        上述表格显示的是整个系统中用户传输文件类型的分析结果。<br>
+                        <b>表格数据分析结果</b>：<br>
+						1.表格上面列举了日常生活中常见文件的后缀名，及整个传输系统中相应后缀名文件的个数。<br>
+						2.从结果上看，除去系统测试时上传一定量的类型为“其他”的文件外，用户上传最多的文件就是图片，其次就是文本文件。<br>
+                        <b>结论</b>：<br>
+						1.后期可更有针对性的完善与图片有关的功能。
+						2.txt文档也占比较大，可以做一个在线记事本，编辑好文本文件后直接存到服务器返回给用户一个文件提取码等等。<br>
+                        <b>注</b>：DOCX、PPTX、XLSX、WPS、RAR类型的文件相应的并入了DOC、PPT、XLS、DOC、ZIP里面。
+                    </p>
+
+
+                </div>
+
+
+                <!--添加一个锚点-->
+                <a name="cswjdxfx"></a>
+                <div class="container-julidingbudejuli">
+                    <h3>传输文件大小分析</h3>
+					<!-- 为ECharts准备一个具备大小（宽高）合适的Dom -->
+                    <div id="Files_Trans_Size" style="height:550px;"></div>
+                    <!--添加Echarts相关的JS脚本代码-->
+                    <script type="text/javascript" src="MyJavaScript/Files_Trans_Size.js"></script>
+
+                    <p>
+                        上述表格显示的是整个系统中用户传输文件的大小的分析结果。<br>
+                        <b>表格数据分析结果</b>：<br>
+						1.表格X轴给出的是从1M到40M不等分的若干区间，Y轴给出的则是整个系统用户传输的相应区间文件的数量。<br>
+						2.从表格数据可知，绝大多数文件均在3M以下。6M-20M之间的文件也占用一定比例。<br>
+						<b>结论</b>：<br>
+                        1.用户在使用的时候，更多的还是在传输小数据量的文件。<br>
+                        2.根据用户传输小文件的使用行为，后期我们也可以加入例如 “DOC -> HTML” 这样的功能，用户上传一份word文档，我们直接在线转换为一个排版好了的在线网页。<br>
+                        <b>注</b>：由于使用的阿里云的服务器规格所限，服务器出口带宽比较小，我们将离线文件最大传输限制设定为了120M，即单个最大离线文件大小不得超过120M。
+                    </p>
+
+
+                </div>
+
+                <!--添加一个锚点-->
+                <a name="wjscsjfb"></a>
+                <div class="container-julidingbudejuli">
+                    <h3>APP启动时间分析</h3>
+		    <!-- 为ECharts准备一个具备大小（宽高）合适的Dom -->
+                    <div id="APP_Start_Time" style="height:550px;"></div>
+                    <!--添加Echarts相关的JS脚本代码-->
+                    <script type="text/javascript" src="MyJavaScript/APP_Start_Time.js"></script>
+
+                   <p>
+                        上述表格显示的是用户启动APP的时间点的分析结果。<br>
+                        <b>表格数据分析结果</b>：<br>
+						1.X轴显示的是一天24小时，Y轴则是用户在这些时间段启动APP的次数。<br>
+                        2.从表格上可以看出，早上8点过后用户开始一整天的日常生活，10点到12点是我们APP使用的一个小高峰，下午的14点到16点又是另一个小高峰，晚上20点左右则是APP使用的最高峰。<br>
+						<b>结论</b>：<br>
+                        1.我们的用户基本在傍晚使用APP。<br>
+						2.根据上述结论后续可以增添一些人性化的提示，例如太晚了提醒用户早点休息之类的小功能等等。<br>
+                        <b>注</b>：表格X轴，10:00处的数据表示的是10:00-12:00间用户启动APP的次数，以此类推。
+                    </p>
+
+
+                </div>
+
+                <!--添加一个锚点-->
+                <a name="APPsysjfx"></a>
+                <div class="container-julidingbudejuli">
+                <div>
+                    <h3>APP使用时长分析</h3>
+		    <!-- 为ECharts准备一个具备大小（宽高）合适的Dom -->
+                    <div id="APP_Holding_Time" style="height:550px;"></div>
+                    <!--添加Echarts相关的JS脚本代码-->
+                    <script type="text/javascript" src="MyJavaScript/APP_Holding_Time.js"></script>
+
+                    <p>
+                        上述表格显示的是用户停留在APP的时长的分析结果。<br>
+                        <b>表格数据分析结果</b>：<br>
+						1.X轴显示的是不同的时间段长度，Y轴则是用户停留在这些时间段的次数。<br>
+                        2.从表格上可以看出，绝大多数时候用户只在APP内停留了不到三分钟就退出APP了。<br>
+						<b>结论</b>：<br>
+                        1.作为一个工具类的APP，用户用完了就退出也无可厚非，停留的时间短也可以理解，但我们可以增添一些其他的功能来“留住用户”，增加用户的粘性，用户在APP内停留的时间越长，APP的潜在价值也就越高。<br>
+                        <b>注</b>：无。
+                    </p>
+
+
+                </div>
+
+                <!--添加一个锚点-->
+                <a name="AndroidVersion"></a>
+                <div class="container-julidingbudejuli">
+
+                     <h3>安卓手机版本分布</h3>
+                    <!-- 为ECharts准备一个具备大小（宽高）合适的Dom -->
+                    <div id="Android_Version" style="height:600px;"></div>
+                    <!--添加Echarts相关的JS脚本代码-->
+                    <script type="text/javascript" src="MyJavaScript/Android_Version.js"></script>
+
+                    <p>
+                        上述饼图显示的是用户群Android端系统版本分析结果。<br>
+                        <b>表格数据分析结果</b>：<br>
+						1.饼图中Android 5.x 及以上的用户占了绝大多数，其次就是4.x，基本没有4.0以下的用户。<br>
+						<b>结论</b>：<br>
+                        1.我们可以更加有针对性的来完善我们的APP，5.x及以上的用户群体最大，可以把最主要的精力放在适配5.x及以上的系统上面来。<br>
+                        <b>注</b>：无。
+                    </p>
+		</div>
+
+                <!--添加一个锚点-->
+                <a name="khdfblfb"></a>
+                <div class="container-julidingbudejuli">
+                    <h3>客户端分辨率分布</h3>
+		     <!-- 为ECharts准备一个具备大小（宽高）合适的Dom -->
+                    <div id="Android_Screen_Resolution" style="height:600px;"></div>
+                    <!--添加Echarts相关的JS脚本代码-->
+                    <script type="text/javascript" src="MyJavaScript/Android_Screen_Resolution.js"></script>
+                   <p>
+                        上述饼图显示的是用户群Android端手机分辨率的分析结果。<br>
+                        <b>表格数据分析结果</b>：<br>
+						1.饼图中720P以及1080P的屏幕占了绝大多数。<br>
+						2.高分辨率设备已经是市场的主流了。<br>
+						<b>结论</b>：<br>
+                        1.根据上述统计结果，我们可以更加有针对性的快速的调整UI开发适配重点，进而提高工作效率。<br>
+                        <b>注</b>：图中720P-表示分辨率低于720P，1080P+表示分辨率高于1080P。
+                    </p>
+		</div>
+
+                <!--添加一个锚点-->
+                <a name="yhdyfbqk"></a>
+                <div class="container-julidingbudejuli">
+                    <h3><!--用户地域分布情况-->数据可视化小总结</h3>
+                    <p>
+                        在我们的APP开发进度能全权掌控的情况下，团队选择了做数据这一块，我们收集了大量关于用户使用行为的数据都存储在我们租用的阿里云的服务器上面，只从中抽取了若干点来做可视化的展示。<br>
+                        上述数据可视化采用的是百度开源的纯JS数据可视化工具Echarts。<br>
+                        我们认为在现今的“大数据”时代，数据就是财富，掌握了数据，就可以掌握用户行为规律以及整个市场的动态，数据就是驱动信息化产业的动力所在。
+                    </p>
+		</div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+	
+<!-- Footer -->
+    <footer class="dibianlanyanse">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="../index.php" target="_blank">首页</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="../tanzhen.php" target="_blank" class="links">CentOS6.5 探针</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="../phpinfo.php" target="_blank" class="links">PHPinfo</a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted small">Copyright &copy; 湖北大学根号三团队 2016. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
